@@ -1,0 +1,10 @@
+name: astrbot_plugin_vrchat
+display_name: VRChat 助手
+author: shumatusu
+desc: 以 /vrc 为单入口的 VRChat 助手：查询用户/世界/好友/通知/群组/收藏/虚拟形象（Avatar），支持多用户独立绑定、Fernet 加密凭证、全量 Cookie 登录态持久化、TOTP 自动 2FA、60 秒缓存、分类渲染（通知走纯文本、资料/列表出图），以及好友上线提醒与全局通知推送。适用于 OneBot 11（aiocqhttp / QQ）机器人。
+short_desc: VRChat 查询、账号绑定与好友上线/通知订阅助手（OneBot 11）。
+version: 2.0.2
+astrbot_version: ">=4.14.6"
+repo: https://github.com/shumatusu/astrbot_plugin_vrchat
+support_platforms:
+  - aiocqhttp

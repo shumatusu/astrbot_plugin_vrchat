@@ -1,0 +1,98 @@
+{
+  "api_base_url": {
+    "description": "VRChat API 地址",
+    "type": "string",
+    "default": "https://api.vrchat.cloud/api/1",
+    "hint": "一般不需要修改。仅在使用兼容网关/代理时更改。"
+  },
+  "api_key": {
+    "description": "API Key（可选）",
+    "type": "string",
+    "default": "",
+    "secret": true,
+    "hint": "现行 VRChat API 已不再要求 apiKey，留空即可；如你的网关仍要求，可在此填写。"
+  },
+  "user_agent": {
+    "description": "User-Agent",
+    "type": "string",
+    "default": "astrbot-plugin-vrchat/2.0.0 (+https://github.com/AstrBotDevs/AstrBot)",
+    "hint": "VRChat 规范要求格式：<应用名>/<版本> <联系地址>，请勿移除联系地址。"
+  },
+  "request_timeout": {
+    "description": "请求超时（秒）",
+    "type": "int",
+    "default": 20,
+    "slider": { "min": 5, "max": 60, "step": 1 }
+  },
+  "max_retry_429": {
+    "description": "429 限流重试次数",
+    "type": "int",
+    "default": 2,
+    "slider": { "min": 0, "max": 5, "step": 1 },
+    "hint": "按指数退避重试。0 表示遇到 429 直接提示用户稍后再试。"
+  },
+  "cache_ttl": {
+    "description": "只读查询缓存时间（秒）",
+    "type": "int",
+    "default": 60,
+    "slider": { "min": 10, "max": 600, "step": 10 },
+    "hint": "降低对 VRChat API 的请求压力；写操作后自动清除本人缓存。"
+  },
+  "search_page_size": {
+    "description": "搜索/列表每页条数",
+    "type": "int",
+    "default": 8,
+    "slider": { "min": 3, "max": 20, "step": 1 }
+  },
+  "friends_page_size": {
+    "description": "好友列表显示条数",
+    "type": "int",
+    "default": 10,
+    "slider": { "min": 3, "max": 30, "step": 1 }
+  },
+  "favorite_tag_world": {
+    "description": "收藏世界的默认收藏组",
+    "type": "string",
+    "default": "worlds1",
+    "hint": "合法值为 worlds1~worlds4（Avatar 为 avatars1~avatars4，好友为 group_0~group_3）；也可以在指令中临时指定：/vrc 收藏 添加世界 \"wrld_\" worlds2"
+  },
+  "enable_subscribe": {
+    "description": "启用订阅轮询",
+    "type": "bool",
+    "default": true,
+    "hint": "开启后每 5 分钟轮询一次好友在线状态与通知，用于上线提醒和全局通知推送。"
+  },
+  "subscribe_interval": {
+    "description": "订阅轮询间隔（秒）",
+    "type": "int",
+    "default": 300,
+    "slider": { "min": 300, "max": 1800, "step": 60 },
+    "hint": "VRChat 对请求频率敏感，下限固定为 300 秒；配置小于 300 会被强制提升到 300。"
+  },
+  "bind_allow_group": {
+    "description": "允许在群聊中绑定账号",
+    "type": "bool",
+    "default": false,
+    "hint": "出于账号安全考虑默认仅允许私聊绑定。开启后仍强烈建议用户在私聊操作。"
+  },
+  "warm_up_sessions": {
+    "description": "启动时预热登录态",
+    "type": "bool",
+    "default": true,
+    "hint": "启动时对所有已绑定账号调用 get_current_user() 校验登录态，失效时自动回退密码登录。"
+  },
+  "encryption_key": {
+    "description": "Fernet 加密密钥（可选）",
+    "type": "string",
+    "default": "",
+    "secret": true,
+    "hint": "留空则自动生成并保存到 AstrBot KV。填写后密钥由你自行保管（Fernet 格式：urlsafe base64 编码的 32 字节密钥）。"
+  },
+  "allowed_user_ids": {
+    "description": "允许使用插件的用户 ID",
+    "type": "list",
+    "default": [],
+    "_special": "sender_id",
+    "hint": "留空表示所有用户可用。"
+  }
+}
